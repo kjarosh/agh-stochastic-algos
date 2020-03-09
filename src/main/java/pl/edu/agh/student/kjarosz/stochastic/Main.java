@@ -24,7 +24,7 @@ public class Main {
         List<Point> lastPoints = new ArrayList<>();
         Supplier<Point> randomizer = () -> {
             if (lastPoints.size() == 0) {
-                return randpoint(upper, lower);
+                return Point.randpoint(upper, lower);
             }
 
             Point point = lastPoints.get(rand.nextInt(lastPoints.size()));
@@ -67,43 +67,9 @@ public class Main {
         return points;
     }
 
-    private Point randpoint(Point upper, Point lower) {
-        return new Point(
-                rand.nextFloat() * (upper.x - lower.x) + lower.x,
-                rand.nextFloat() * (upper.y - lower.y) + lower.y);
-    }
-
     private float rosenbrock(float x, float y) {
         float c = PARAM_A - x;
         float d = PARAM_B * (y - x * x);
         return c * c + d * d;
-    }
-
-    @FunctionalInterface
-    public interface Function2D {
-        float apply(float x, float y);
-    }
-
-    public class Point {
-        float x;
-        float y;
-
-        public Point() {
-            this.x = 0f;
-            this.y = 0f;
-        }
-
-        public Point(float x, float y) {
-            this.x = x;
-            this.y = y;
-        }
-
-        @Override
-        public String toString() {
-            return "Point{" +
-                    "x=" + x +
-                    ", y=" + y +
-                    '}';
-        }
     }
 }
